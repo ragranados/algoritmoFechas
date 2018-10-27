@@ -41,23 +41,7 @@ console.table(list.map(({
     name
 }) => name));
 
-var isBisiesto = function(an) {
-    if(an % 4 == 0){
-        if(an%100 != 0){
-            return true;
-        } else {
-            if(an % 400 != 0){
-                return false;
-            }else {
-                return true;
-            }
-        }
-    }else {
-        return false;
-    }
-}
-
-var verificarCumple = function (fecha) {
+/*var verificarCumple = function (fecha) {
     var fecha = new Date(fecha);
     fecha = fecha.toLocaleDateString();
     var fechaDiv = fecha.split("/");
@@ -72,12 +56,16 @@ var verificarCumple = function (fecha) {
         }
     }
     return 1;
-}
+}*/
 
+
+//el metodo ya funciona, ya que lo que hace es tomar en milisegundos la diferencia entre el cumpleanios y la fecha actual
+//entonces al pasarlo a la objeto fecha, se crea el tiempo pasado en milisegundos desde 1970, entonces si ya cumplio anios, al hace .getUTCFullYear
+//regresa la edad correcta de la persona porque en los milisegundos tambien se cuentan los meses y dias.
 function getAge(birthday) {
     var ageDifMs = Date.now() - birthday;
-    var ageDate = new Date(ageDifMs); // miliseconds from eposdsd
-    return Math.abs(ageDate.getUTCFullYear() - 1970) + verificarCumple(birthday);
+    var ageDate = new Date(ageDifMs); // miliseconds from epos
+    return Math.abs(ageDate.getUTCFullYear() - 1970) ;
 }
 
 console.log("Average age %i", list.reduce((sum, {
